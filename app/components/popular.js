@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { fetchPopularRepos} from '../utils/api'
-import { throws } from 'assert';
 
 function LanguagesNav({selected, onUpdateLanguage}) {
   const languages = ['All', 'Python', 'Elixir', 'Javascript']
