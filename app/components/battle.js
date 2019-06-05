@@ -145,11 +145,23 @@ export default class Battle extends React.Component {
     })
   }
 
+  handleNewBattle() {
+    this.setState({
+      playerOne: null,
+      playerTwo: null,
+      battle: false
+    })
+  }
+
   render () {
     const { playerOne, playerTwo, battle } = this.state
 
     if (battle === true) {
-      return <Results playerOne={playerOne} playerTwo={playerTwo}/>
+      return <Results
+        playerOne={playerOne}
+        playerTwo={playerTwo}
+        onReset={() => this.handleNewBattle()} 
+        />
     }
 
     return (
