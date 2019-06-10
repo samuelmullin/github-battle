@@ -4,41 +4,50 @@ import { battle } from '../utils/api'
 import {FaCompass, FaBriefcase, FaUsers, FaUserFriends, FaCode, FaUser, FaWpbeginner} from  'react-icons/fa'
 import Card from './card'
 import Loading from './loading'
+import Tooltip from './tooltip'
 
 
-function ProfileList ({ profile }){
-  return(
-    <ul className='card-list'>
+
+
+function ProfileList ({profile}) {
+  return (
+    <ul className='card-list'> 
       <li>
-        <FaUser color='rgb(239, 115, 115)' size={22}/>
-        {profile.name}
+      <Tooltip text="Username">
+          <FaUser color='rgb(239, 115, 115)' size={22}/>
+          {profile.name}
+      </Tooltip>
       </li>
       {profile.location && (
         <li>
-          <FaCompass color='rgb(144, 115, 255)' size={22}/>
-          {profile.location}
+          <Tooltip text="Location">
+            <FaCompass color='rgb(144, 115, 255)' size={22}/>
+            {profile.location}
+          </Tooltip>
         </li>
         )}
         {profile.company && (
-        <li>
-          <FaBriefcase color='#795548' size={22}/>
-          {profile.company}
+          <li>
+          <Tooltip text="Employer">
+            <FaBriefcase color='#795548' size={22}/>
+            {profile.company}
+          </Tooltip>
         </li>
         )}
         <li>
-        <FaUsers color='rgb(129, 195, 245)' size={22}/>
-        {profile.followers.toLocaleString()} followers
+        <Tooltip text="Follower Count">
+          <FaUsers color='rgb(129, 195, 245)' size={22}/>
+          {profile.followers.toLocaleString()} followers
+        </Tooltip>
       </li>
       <li>
-        <FaUserFriends color='rgb(64, 183, 95)' size={22}/>
-        {profile.following.toLocaleString()} following
+        <Tooltip text="Friend Count">
+          <FaUserFriends color='rgb(64, 183, 95)' size={22}/>
+          {profile.following.toLocaleString()} following
+        </Tooltip>
       </li>
     </ul>
   )
-}
-
-ProfileList.propTypes = {
-  profile: PropTypes.object.isRequired
 }
 
  export default class Results extends React.Component {
@@ -76,7 +85,7 @@ ProfileList.propTypes = {
     const { winner, loser, error, loading} = this.state
     
     if (loading === true) {
-      return <Loading text='Fetching' speed='300' />
+      return <Loading text='Fetching' speed={300} />
     }
 
     if (error) {

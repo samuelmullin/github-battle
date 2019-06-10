@@ -4,6 +4,7 @@ import { fetchPopularRepos} from '../utils/api'
 import { FaUser, FaStar, FaCodeBranch, FaExclamationTriangle } from 'react-icons/fa'
 import Card from './card.js'
 import Loading from './loading'
+import Tooltip from './tooltip'
 
 
 function LanguagesNav({selected, onUpdateLanguage}) {
@@ -51,22 +52,30 @@ function ReposGrid ({ repos }) {
             >
               <ul className='card-list'>
                 <li>
-                  <FaUser color='rgb(255, 191, 116)' size={22} />
-                  <a href ={`https://github.com/${login}`}>
-                    {login}
-                  </a>
+                  <Tooltip text="Github Profile">
+                    <FaUser color='rgb(255, 191, 116)' size={22} />
+                    <a href ={`https://github.com/${login}`}>
+                      {login}
+                    </a>
+                  </Tooltip>
                 </li>
                 <li>
-                  <FaStar color='rgb(255, 215, 0)' size={22} />
-                  {stargazers_count.toLocaleString()} stars
+                <Tooltip text="Total Stars">
+                    <FaStar color='rgb(255, 215, 0)' size={22} />
+                    {stargazers_count.toLocaleString()} stars
+                </Tooltip>
                 </li>
                 <li>
-                  <FaCodeBranch color='rgb(129, 195, 245)' size={22} />
-                  {forks.toLocaleString()} forks
+                  <Tooltip text="Total Forks">
+                    <FaCodeBranch color='rgb(129, 195, 245)' size={22} />
+                    {forks.toLocaleString()} forks
+                  </Tooltip>
                 </li>
                 <li>
-                  <FaExclamationTriangle color='rgb(241, 138, 147)' size={22} />
-                  {forks.toLocaleString()} open issues
+                  <Tooltip text="Total Open Issues">
+                    <FaExclamationTriangle color='rgb(241, 138, 147)' size={22} />
+                    {forks.toLocaleString()} open issues
+                  </Tooltip>
                 </li>
               </ul>
             </Card>
