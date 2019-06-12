@@ -5,6 +5,7 @@ import { FaUser, FaStar, FaCodeBranch, FaExclamationTriangle } from 'react-icons
 import Card from './card.js'
 import Loading from './loading'
 import Tooltip from './tooltip'
+import { ThemeConsumer } from '../contexts/theme'
 
 
 function LanguagesNav({selected, onUpdateLanguage}) {
@@ -37,52 +38,57 @@ ReposGrid.propTypes = {
 
 function ReposGrid ({ repos }) {
   return (
-    <ul className='grid space-around'>
-      {repos.map((repo, index) => {
-        const {name, owner, html_url, stargazers_count, forks, open_issues} = repo
-        const { login, avatar_url } = owner
+    <ThemeConsumer>
+      {({ theme }) => (
+        <ul className='grid space-around'>
+          {repos.map((repo, index) => {
+            const {name, owner, html_url, stargazers_count, forks, open_issues} = repo
+            const { login, avatar_url } = owner
 
-        return (
-          <li key={html_url} className='repo bg-light'>
-            <Card
-              header={`#${index + 1}`}
-              avatar={avatar_url}
-              href={html_url}
-              name={login}
-            >
-              <ul className='card-list'>
-                <li>
-                  <Tooltip text="Github Profile">
-                    <FaUser color='rgb(255, 191, 116)' size={22} />
-                    <a href ={`https://github.com/${login}`}>
-                      {login}
-                    </a>
-                  </Tooltip>
-                </li>
-                <li>
-                <Tooltip text="Total Stars">
-                    <FaStar color='rgb(255, 215, 0)' size={22} />
-                    {stargazers_count.toLocaleString()} stars
-                </Tooltip>
-                </li>
-                <li>
-                  <Tooltip text="Total Forks">
-                    <FaCodeBranch color='rgb(129, 195, 245)' size={22} />
-                    {forks.toLocaleString()} forks
-                  </Tooltip>
-                </li>
-                <li>
-                  <Tooltip text="Total Open Issues">
-                    <FaExclamationTriangle color='rgb(241, 138, 147)' size={22} />
-                    {forks.toLocaleString()} open issues
-                  </Tooltip>
-                </li>
-              </ul>
-            </Card>
-          </li>
-        )
-      })}
-    </ul>
+            return (
+              
+              <li key={html_url} className={`repo bg-${theme}`}>
+                <Card
+                  header={`#${index + 1}`}
+                  avatar={avatar_url}
+                  href={html_url}
+                  name={login}
+                >
+                  <ul className='card-list'>
+                    <li>
+                      <Tooltip text="Github Profile">
+                        <FaUser color='rgb(255, 191, 116)' size={22} />
+                        <a href ={`https://github.com/${login}`}>
+                          {login}
+                        </a>
+                      </Tooltip>
+                    </li>
+                    <li>
+                    <Tooltip text="Total Stars">
+                        <FaStar color='rgb(255, 215, 0)' size={22} />
+                        {stargazers_count.toLocaleString()} stars
+                    </Tooltip>
+                    </li>
+                    <li>
+                      <Tooltip text="Total Forks">
+                        <FaCodeBranch color='rgb(129, 195, 245)' size={22} />
+                        {forks.toLocaleString()} forks
+                      </Tooltip>
+                    </li>
+                    <li>
+                      <Tooltip text="Total Open Issues">
+                        <FaExclamationTriangle color='rgb(241, 138, 147)' size={22} />
+                        {forks.toLocaleString()} open issues
+                      </Tooltip>
+                    </li>
+                  </ul>
+                </Card>
+              </li>
+            )
+          })}
+        </ul>
+      )}
+    </ThemeConsumer>
   )
 }
 
