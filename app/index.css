@@ -241,7 +241,7 @@ body {
 
 .bg-dark {
   background: rgb(36, 40, 42);
-  border-radius: 
+  border-radius: 3px;
 }
   
 .player-inputs .input-dark{
